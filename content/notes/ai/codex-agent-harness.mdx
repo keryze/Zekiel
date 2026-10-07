@@ -1,0 +1,38 @@
+---
+title: Building Better AI Agent Workflows
+description: Goals, observable checkpoints, and why verification belongs inside the loop.
+date: '2026-10-05'
+tags: [AI, Coding, Codex]
+sample: true
+---
+This is a **sample workflow note**, not a claim about an existing production harness.
+
+## Define the artifact
+
+“Build a website” is an intention. “Produce a repository that builds, has working routes, and can be deployed” is a goal with observable outcomes.
+
+An agent needs a clear destination and a way to recognize that it has arrived.
+
+## Make the loop explicit
+
+```text
+Goal
+  → Small, ordered outcomes
+  → Execute one outcome
+  → Inspect the artifact
+  → Run meaningful checks
+  → Revise or continue
+  → Deliver with evidence
+```
+
+Verification is not a ceremonial final step. It is feedback that changes what the agent should do next.
+
+## Design for recovery
+
+Every step should have an observable result, a clear failure state, and a recovery path. A command that exits successfully is only useful evidence if it actually exercised the intended behavior.
+
+## Keep the human-facing state honest
+
+Distinguish completed work from plans, passing checks from skipped checks, and setup problems from application defects. A concise report should make the artifact easy to evaluate.
+
+The interesting part is not how many agents you can spawn. It is whether the system can reliably finish something worth using.

@@ -1,0 +1,36 @@
+---
+title: Understanding Nanite Displacement
+description: A research outline for separating tessellation, material displacement, and what actually changes on screen.
+date: '2026-10-07'
+tags: [Unreal Engine, Rendering, Nanite]
+sample: true
+---
+This is a **sample research note**, not a report of a completed experiment. Replace it with findings from your own engine version and test scene.
+
+## Start with the mechanism
+
+The useful question is not “which checkbox enables this?” but “what geometry is being evaluated, at which stage, and with which constraints?”
+
+Before comparing images, write down the Unreal Engine version, the material setup, the source geometry, and the relevant rendering settings. Nanite behavior and feature support can change between releases.
+
+## Build a controlled test
+
+1. Begin with a single surface and a deliberately simple displacement signal.
+2. Capture a baseline with displacement disabled.
+3. Compare silhouette, shading, shadows, and camera motion separately.
+4. Record both visual differences and measured cost.
+
+A useful result is reproducible. A screenshot with unknown settings is a starting point, not a conclusion.
+
+## Questions worth keeping
+
+- How does the result change with distance?
+- Which artifacts belong to geometry and which belong to temporal reconstruction?
+- What happens at seams or material boundaries?
+- What does the feature cost in the scene where it will actually be used?
+
+> Keep observations, hypotheses, and measurements separate. It makes the next investigation much easier.
+
+## Further reading
+
+Start with the [official Nanite documentation](https://dev.epicgames.com/documentation/en-us/unreal-engine/nanite-virtualized-geometry-in-unreal-engine), then check the release notes for your specific engine version.
