@@ -14,7 +14,9 @@
     "typecheck": "tsc --noEmit",
     "test": "tsx --test tests/*.test.ts",
     "test:e2e": "tsx scripts/verify-browser.ts",
-    "generate:og": "tsx scripts/generate-og.ts"
+    "generate:og": "tsx scripts/generate-og.ts",
+    "format": "prettier --write .",
+    "format:check": "prettier --check ."
   },
   "dependencies": {
     "@fontsource-variable/inter": "^5.2.8",
@@ -35,6 +37,7 @@
     "eslint": "^9.39.0",
     "eslint-config-next": "16.4.0",
     "playwright-core": "^1.58.0",
+    "prettier": "^3.9.9",
     "tailwindcss": "4.3.3",
     "tsx": "^4.21.0",
     "typescript": "^5.9.3"

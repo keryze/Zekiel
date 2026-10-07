@@ -13,7 +13,7 @@ import { site } from '../site.config';
 const notes = getNotes();
 test('projects have unique valid slugs, actual assets, and technical breakdowns', () => {
   assert.ok(projects.length > 0);
-  assert.equal(new Set(projects.map(p => p.slug)).size, projects.length);
+  assert.equal(new Set(projects.map((p) => p.slug)).size, projects.length);
   for (const p of projects) {
     assert.match(p.slug, /^[a-z0-9-]+$/);
     assert.ok(fs.existsSync(path.join(process.cwd(), 'public', p.image)));
@@ -25,7 +25,7 @@ test('projects have unique valid slugs, actual assets, and technical breakdowns'
 });
 test('notes are auto-discovered with valid metadata and distinct routes', () => {
   assert.ok(notes.length > 0);
-  assert.equal(new Set(notes.map(n => n.href)).size, notes.length);
+  assert.equal(new Set(notes.map((n) => n.href)).size, notes.length);
   for (const n of notes) {
     assert.ok(!Number.isNaN(Date.parse(n.date)));
     assert.equal(getNote(n.category, n.slug)?.title, n.title);
@@ -36,22 +36,25 @@ test('notes are auto-discovered with valid metadata and distinct routes', () => 
   assert.equal(getNote('../', 'missing'), undefined);
 });
 test('sample work is explicitly labeled in its data', () => {
-  for (const p of projects.filter(p => p.status === 'Sample')) assert.match(p.summary, /sample/i);
-  for (const n of notes.filter(n => n.sample)) assert.match(n.source, /sample/i);
+  for (const p of projects.filter((p) => p.status === 'Sample')) assert.match(p.summary, /sample/i);
+  for (const n of notes.filter((n) => n.sample)) assert.match(n.source, /sample/i);
 });
 test('all lab links point to existing content', () => {
-  const routes = new Set([...projects.map(p => `/work/${p.slug}`), ...notes.map(n => n.href)]);
+  const routes = new Set([...projects.map((p) => `/work/${p.slug}`), ...notes.map((n) => n.href)]);
   for (const experiment of experiments) assert.ok(routes.has(experiment.href), experiment.href);
 });
 test('MDX compiles every real note, including GFM and code blocks', async () => {
   for (const note of notes) {
-    const result = await compileMDX({ source: note.source, options: { mdxOptions: { remarkPlugins: [remarkGfm] } } });
+    const result = await compileMDX({
+      source: note.source,
+      options: { mdxOptions: { remarkPlugins: [remarkGfm] } },
+    });
     assert.ok(result.content);
   }
 });
 test('table-of-contents headings have unique non-empty anchors', () => {
   for (const note of notes) {
-    const ids = [...note.source.matchAll(/^## (.+)$/gm)].map(match => headingId(match[1]));
+    const ids = [...note.source.matchAll(/^## (.+)$/gm)].map((match) => headingId(match[1]));
     assert.ok(ids.every(Boolean));
     assert.equal(new Set(ids).size, ids.length);
   }

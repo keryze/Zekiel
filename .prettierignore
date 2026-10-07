@@ -1,0 +1,7 @@
+node_modules
+.next
+out
+verification
+package-lock.json
+next-env.d.ts
+public/**/*.svg

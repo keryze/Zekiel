@@ -7,6 +7,7 @@
 - `npm install`，随后用 `npm ci` 验证 lockfile 可重复安装。
 - `npm run lint`：通过，零警告。
 - `npm run typecheck`：通过。
+- `npm run format:check`：通过。源码使用统一 Prettier 格式，优化过的 SVG 不重新排版。
 - `npm test`：8 个内容系统测试通过，没有跳过。涵盖资源、路由、样例标记、Lab 链接、实际 MDX 编译、目录锚点、部署 URL 和中文标题。
 - `npm run build`：默认根路径和 GitHub Pages `/Zekiel` 子路径均成功静态导出。
 - 实际启动 Next 开发服务器并检查全部 15 个内容页面。开发阶段发现的问题已修复，没有更改或禁用断言。
@@ -19,11 +20,11 @@
 
 本地生产静态预览，使用 gzip、哈希资源缓存、Lighthouse 默认模拟限速。以下是实验室测量，不是线上真实用户数据，也不是对所有设备与未来内容的保证。
 
-| 页面 / 模式 | Performance | Accessibility | Best Practices | SEO |
-| --- | ---: | ---: | ---: | ---: |
-| 首页 / Mobile | 97 | 100 | 100 | 100 |
-| 首页 / Desktop | 100 | 100 | 100 | 100 |
-| Houdini MDX 文章 / Mobile | 99 | 100 | 100 | 100 |
+| 页面 / 模式               | Performance | Accessibility | Best Practices | SEO |
+| ------------------------- | ----------: | ------------: | -------------: | --: |
+| 首页 / Mobile             |          97 |           100 |            100 | 100 |
+| 首页 / Desktop            |         100 |           100 |            100 | 100 |
+| Houdini MDX 文章 / Mobile |          99 |           100 |            100 | 100 |
 
 首页 Mobile：LCP 2.6s、TBT 50ms、CLS 0.001。首轮无压缩传输的性能为 77；通过优化 SVG、传输压缩、静态缓存和图片优先级提高到上述结果。不是通过降低测试限速或删除检查来提高分数。
 
@@ -53,3 +54,11 @@ CHROME_PATH=/usr/bin/chromium npx lighthouse http://localhost:3000/ \
 GitHub push、仓库可见性、Pages 设置和成功部署需要单独确认。仓库提供了 Actions workflow；在 GitHub Settings → Pages 选择 GitHub Actions 后，才具备对应的发布前提。不要将预测的 Pages 地址或本地构建成功表述为已上线。
 
 云环境安装脚本、启动说明和 GitHub API / Pages 网络域名已保存到配置草稿。草稿保存不会执行脚本、修改当前网络策略或发布环境快照；环境设置的审核、保存与发布由产品流程完成。
+
+## GitHub 当前状态
+
+已成功提交并推送到公开仓库 `https://github.com/keryze/Zekiel`，初始提交信息为 `Initial personal website`。远端 main SHA 已与本地逐一核对。GitHub Actions 首次运行的 build job 成功：安装、lint、typecheck、8 项测试、静态构建和 artifact 上传全部通过。
+
+Pages 查询返回 404，启用接口返回 `Resource not accessible by integration`（HTTP 403）。当前集成没有启用 Pages 所需的权限。官方 `actions/configure-pages@v5` 说明自动 enablement 需要非 GITHUB_TOKEN 的管理与 Pages 写权限，故不能用默认 workflow token 自动解决此设置。
+
+人工操作仅需：仓库 Settings → Pages → Source 选择 GitHub Actions，再重新运行部署工作流。尚未上线，不把预计的 `https://keryze.github.io/Zekiel/` 当作已验证的部署地址。无需在聊天中提供凭据。

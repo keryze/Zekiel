@@ -12,7 +12,7 @@ Next.js 16 App Router · React 19 · TypeScript · Tailwind CSS 4 · 本地 MDX 
 
 ## 本地开发
 
-需要 Node.js 24 和 npm（`.nvmrc` 已配置）。
+需要 Node.js 24 和 npm（`.nvmrc` 已配置）。源码统一使用 Prettier；`npm run format` 用于格式化，`npm run format:check` 用于检查。
 
 ```sh
 npm install
@@ -24,6 +24,7 @@ npm run dev
 ```sh
 npm run lint
 npm run typecheck
+npm run format:check
 npm test
 npm run build
 npm run preview
@@ -43,17 +44,17 @@ npm run test:e2e
 
 ## 页面
 
-| URL | 用途 |
-| --- | --- |
-| `/` | 个人入口、精选作品、开放探索和近期笔记 |
-| `/work/` | 可筛选作品集 |
-| `/work/[slug]/` | 技术拆解与下一作品 |
-| `/lab/` | 实验、原型和问题索引 |
-| `/notes/` | 按分类筛选的数字花园 |
-| `/notes/[category]/[slug]/` | MDX 文章、目录、代码和表格 |
-| `/about/` | 背景、兴趣和工作方式 |
-| `/now/` | 可随时更新的当前关注 |
-| `/reading/` | 简洁书架 |
+| URL                         | 用途                                   |
+| --------------------------- | -------------------------------------- |
+| `/`                         | 个人入口、精选作品、开放探索和近期笔记 |
+| `/work/`                    | 可筛选作品集                           |
+| `/work/[slug]/`             | 技术拆解与下一作品                     |
+| `/lab/`                     | 实验、原型和问题索引                   |
+| `/notes/`                   | 按分类筛选的数字花园                   |
+| `/notes/[category]/[slug]/` | MDX 文章、目录、代码和表格             |
+| `/about/`                   | 背景、兴趣和工作方式                   |
+| `/now/`                     | 可随时更新的当前关注                   |
+| `/reading/`                 | 简洁书架                               |
 
 ## 目录结构
 

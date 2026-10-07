@@ -9,11 +9,170 @@ import { assetPath, absoluteUrl } from '@/lib/utils';
 export const metadata: Metadata = { alternates: { canonical: absoluteUrl('/') } };
 export default function Home() {
   const notes = getNotes().slice(0, 3);
-  return <div className="container"><section className="hero" aria-labelledby="hero-title"><div className="hero-copy"><p className="eyebrow mono"><span className="status-dot" />TECHNICAL ARTIST & CREATIVE TECHNOLOGIST</p><h1 id="hero-title">Art, through<br /><span className="hero-serif">systems.</span></h1><p className="hero-description">I build procedural worlds, explore real-time graphics, and experiment with AI-driven creation.</p><div className="hero-tags mono"><span>UNREAL ENGINE</span><span>HOUDINI</span><span>AI / CODE</span></div><Link href="/work" className="text-link hero-link">Explore the work <ForwardArrow /></Link></div><figure className="hero-figure"><div className="hero-figure-head mono"><span>FIELD NOTES / 001</span><span className="accent">XYZ ↗</span></div><Image src={assetPath('/images/snow.svg')} alt="A procedural mountain height field, drawn as an isometric triangulated surface." width={1000} height={720} preload fetchPriority="high" sizes="(max-width: 900px) 100vw, 50vw" /><figcaption className="mono"><span>ORDER, EMERGING FROM RULES.</span><span>SAMPLE VISUAL</span></figcaption></figure></section>
-    <div className="home-index mono"><span>01 — SELECTED WORK</span><span>02 — OPEN EXPLORATIONS</span><span>03 — NOTES & THINKING</span></div>
-    <section className="home-work section-block" aria-labelledby="selected-work"><div className="section-heading"><div><p className="eyebrow mono">01 / PRACTICE</p><h2 id="selected-work">Selected work<span className="accent">.</span></h2></div><Link href="/work" className="text-link">All projects <OutwardArrow /></Link></div><p className="section-description">Studies at the intersection of art, code, and systems.<br />{projects.some(p => p.status === 'Sample') ? 'Entries marked Sample are concept studies.' : 'A record of what I build and learn.'}</p><div className="project-grid">{projects.map((project, index) => <ProjectCard key={project.slug} project={project} index={index} />)}</div></section>
-    <section className="home-explorations section-block" aria-labelledby="explorations"><div className="section-heading"><div><p className="eyebrow mono">02 / INQUIRY</p><h2 id="explorations">Open explorations<span className="accent">.</span></h2></div><Link href="/lab" className="text-link">Enter the lab <OutwardArrow /></Link></div><div className="exploration-list">{[{ number: '01', title: 'Real-time graphics', description: 'Light transport, temporal behavior, and the mechanics beneath the frame.', label: 'RENDERING / UE5', href: '/work/ue5-rendering-experiments' }, { number: '02', title: 'Procedural worlds', description: 'Geometry as a consequence of rules. Tools that leave room for intent.', label: 'HOUDINI / SYSTEMS', href: '/work/houdini-procedural-modeling' }, { number: '03', title: 'Agents that build', description: 'From open-ended goals to finished, verifiable artifacts.', label: 'AI / AUTOMATION', href: '/work/ai-agent-lab' }].map(item => <Link key={item.number} href={item.href} className="exploration-row"><span className="mono exploration-number">{item.number}</span><div><h3>{item.title}</h3><p>{item.description}</p></div><span className="mono exploration-label">{item.label}</span><OutwardArrow /></Link>)}</div></section>
-    <section className="home-notes section-block" aria-labelledby="latest-notes"><div className="notes-intro"><p className="eyebrow mono">03 / THE GARDEN</p><h2 id="latest-notes">Notes from<br />the process<span className="accent">.</span></h2><p>Working ideas, technical breakdowns, and things worth thinking about twice.</p><Link href="/notes" className="text-link">Browse all notes <OutwardArrow /></Link></div><div className="home-note-list">{notes.map(note => <Link key={note.href} href={note.href} className="home-note"><div className="mono"><span>{note.category}</span><span>{note.sample ? 'SAMPLE / ' : ''}{note.readingMinutes} MIN</span></div><h3>{note.title}<OutwardArrow /></h3><p>{note.description}</p></Link>)}</div></section>
-    <div className="home-now"><span className="status-dot" /><p>A small window into what has my attention.</p><Link href="/now" className="text-link">The now page <OutwardArrow size={16} /></Link></div>
-  </div>;
+  return (
+    <div className="container">
+      <section className="hero" aria-labelledby="hero-title">
+        <div className="hero-copy">
+          <p className="eyebrow mono">
+            <span className="status-dot" />
+            TECHNICAL ARTIST & CREATIVE TECHNOLOGIST
+          </p>
+          <h1 id="hero-title">
+            Art, through
+            <br />
+            <span className="hero-serif">systems.</span>
+          </h1>
+          <p className="hero-description">
+            I build procedural worlds, explore real-time graphics, and experiment with AI-driven
+            creation.
+          </p>
+          <div className="hero-tags mono">
+            <span>UNREAL ENGINE</span>
+            <span>HOUDINI</span>
+            <span>AI / CODE</span>
+          </div>
+          <Link href="/work" className="text-link hero-link">
+            Explore the work <ForwardArrow />
+          </Link>
+        </div>
+        <figure className="hero-figure">
+          <div className="hero-figure-head mono">
+            <span>FIELD NOTES / 001</span>
+            <span className="accent">XYZ ↗</span>
+          </div>
+          <Image
+            src={assetPath('/images/snow.svg')}
+            alt="A procedural mountain height field, drawn as an isometric triangulated surface."
+            width={1000}
+            height={720}
+            preload
+            fetchPriority="high"
+            sizes="(max-width: 900px) 100vw, 50vw"
+          />
+          <figcaption className="mono">
+            <span>ORDER, EMERGING FROM RULES.</span>
+            <span>SAMPLE VISUAL</span>
+          </figcaption>
+        </figure>
+      </section>
+      <div className="home-index mono">
+        <span>01 — SELECTED WORK</span>
+        <span>02 — OPEN EXPLORATIONS</span>
+        <span>03 — NOTES & THINKING</span>
+      </div>
+      <section className="home-work section-block" aria-labelledby="selected-work">
+        <div className="section-heading">
+          <div>
+            <p className="eyebrow mono">01 / PRACTICE</p>
+            <h2 id="selected-work">
+              Selected work<span className="accent">.</span>
+            </h2>
+          </div>
+          <Link href="/work" className="text-link">
+            All projects <OutwardArrow />
+          </Link>
+        </div>
+        <p className="section-description">
+          Studies at the intersection of art, code, and systems.
+          <br />
+          {projects.some((p) => p.status === 'Sample')
+            ? 'Entries marked Sample are concept studies.'
+            : 'A record of what I build and learn.'}
+        </p>
+        <div className="project-grid">
+          {projects.map((project, index) => (
+            <ProjectCard key={project.slug} project={project} index={index} />
+          ))}
+        </div>
+      </section>
+      <section className="home-explorations section-block" aria-labelledby="explorations">
+        <div className="section-heading">
+          <div>
+            <p className="eyebrow mono">02 / INQUIRY</p>
+            <h2 id="explorations">
+              Open explorations<span className="accent">.</span>
+            </h2>
+          </div>
+          <Link href="/lab" className="text-link">
+            Enter the lab <OutwardArrow />
+          </Link>
+        </div>
+        <div className="exploration-list">
+          {[
+            {
+              number: '01',
+              title: 'Real-time graphics',
+              description:
+                'Light transport, temporal behavior, and the mechanics beneath the frame.',
+              label: 'RENDERING / UE5',
+              href: '/work/ue5-rendering-experiments',
+            },
+            {
+              number: '02',
+              title: 'Procedural worlds',
+              description: 'Geometry as a consequence of rules. Tools that leave room for intent.',
+              label: 'HOUDINI / SYSTEMS',
+              href: '/work/houdini-procedural-modeling',
+            },
+            {
+              number: '03',
+              title: 'Agents that build',
+              description: 'From open-ended goals to finished, verifiable artifacts.',
+              label: 'AI / AUTOMATION',
+              href: '/work/ai-agent-lab',
+            },
+          ].map((item) => (
+            <Link key={item.number} href={item.href} className="exploration-row">
+              <span className="mono exploration-number">{item.number}</span>
+              <div>
+                <h3>{item.title}</h3>
+                <p>{item.description}</p>
+              </div>
+              <span className="mono exploration-label">{item.label}</span>
+              <OutwardArrow />
+            </Link>
+          ))}
+        </div>
+      </section>
+      <section className="home-notes section-block" aria-labelledby="latest-notes">
+        <div className="notes-intro">
+          <p className="eyebrow mono">03 / THE GARDEN</p>
+          <h2 id="latest-notes">
+            Notes from
+            <br />
+            the process<span className="accent">.</span>
+          </h2>
+          <p>Working ideas, technical breakdowns, and things worth thinking about twice.</p>
+          <Link href="/notes" className="text-link">
+            Browse all notes <OutwardArrow />
+          </Link>
+        </div>
+        <div className="home-note-list">
+          {notes.map((note) => (
+            <Link key={note.href} href={note.href} className="home-note">
+              <div className="mono">
+                <span>{note.category}</span>
+                <span>
+                  {note.sample ? 'SAMPLE / ' : ''}
+                  {note.readingMinutes} MIN
+                </span>
+              </div>
+              <h3>
+                {note.title}
+                <OutwardArrow />
+              </h3>
+              <p>{note.description}</p>
+            </Link>
+          ))}
+        </div>
+      </section>
+      <div className="home-now">
+        <span className="status-dot" />
+        <p>A small window into what has my attention.</p>
+        <Link href="/now" className="text-link">
+          The now page <OutwardArrow size={16} />
+        </Link>
+      </div>
+    </div>
+  );
 }
